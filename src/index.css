@@ -1,15 +1,16 @@
-h1 {
-  color: green;
-  font-style: italic;
-  font-size: 16;
-}
-
-.error {
-  color: red;
+.notification {
   background: lightgrey;
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.notification-success {
+  color: green;
+}
+
+.notification-error {
+  color: red;
 }

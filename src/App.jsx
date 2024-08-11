@@ -9,7 +9,7 @@ const App = () => {
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newUrl, setNewUrl] = useState('')
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [newMessage, setNewMessage] = useState({message: null, type: ''})
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -43,6 +43,10 @@ const App = () => {
       create(blogObject)
         .then(returnedBlog => {
           setBlogs(blogs.concat(returnedBlog))
+          setNewMessage({message: `a new blog ${newTitle} by ${newAuthor} added`, type: 'success'})
+            setTimeout(() => {
+              setNewMessage({ message: null, type: '' })
+            }, 5000)
           setNewAuthor('')
           setNewTitle('')
           setNewUrl('')
@@ -73,11 +77,15 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      setNewMessage({message: `Login successful`, type: 'success'})
+        setTimeout(() => {
+          setNewMessage({ message: null, type: '' })
+        }, 5000)
     } catch (exception) {
-      setErrorMessage('wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+      setNewMessage({ message: `wrong username or password`, type: 'error' })
+        setTimeout(() => {
+          setNewMessage({ message: null, type: '' })
+        }, 5000)
     }
   }
 
@@ -158,7 +166,7 @@ const App = () => {
 
   return (
     <div>
-      <Notification message={errorMessage} />
+      <Notification message={newMessage.message} type={newMessage.type} />
 
       {!user && loginForm()}
       {user && loggedIn()}
