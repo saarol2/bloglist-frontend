@@ -6,6 +6,9 @@ import Notification from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [newTitle, setNewTitle] = useState('')
+  const [newAuthor, setNewAuthor] = useState('')
+  const [newUrl, setNewUrl] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -27,6 +30,34 @@ const App = () => {
       )
     }
   }, [user])
+
+  const addBlog = (event) => {
+    event.preventDefault()
+    const blogObject = {
+      title: newTitle,
+      author: newAuthor,
+      url: newUrl
+    }
+
+    blogService.
+      create(blogObject)
+        .then(returnedBlog => {
+          setBlogs(blogs.concat(returnedBlog))
+          setNewAuthor('')
+          setNewTitle('')
+          setNewUrl('')
+        })
+  }
+
+  const handleTitleChange = (event) => {
+    setNewTitle(event.target.value)
+  }
+  const handleAuthorChange = (event) => {
+    setNewAuthor(event.target.value)
+  }
+  const handleUrlChange = (event) => {
+    setNewUrl(event.target.value)
+  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -83,15 +114,46 @@ const App = () => {
     </form>      
   )
   
-  const blogList = () => (
+  const loggedIn = () => (
     <div>
       <h2>blogs</h2>
-      <p>{user.name} logged in</p>
+      <p>{user.name} logged in
       <button onClick={handleLogout}>logout</button>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      </p>
     </div>
+  )
+
+  const blogForm = () => (
+    <form onSubmit={addBlog}>
+      <h2>
+        Create new
+      </h2>
+      <div>
+        title:
+        <input
+          type="text"
+          value={newTitle}
+          onChange={handleTitleChange}
+        />
+      </div>
+      <div>
+        author:
+        <input
+          type="text"
+          value={newAuthor}
+          onChange={handleAuthorChange}
+        />
+      </div>
+      <div>
+        url:
+        <input
+          type="text"
+          value={newUrl}
+          onChange={handleUrlChange}
+        />
+      </div>
+      <button type="submit">create</button>
+    </form>
   )
 
   return (
@@ -99,7 +161,12 @@ const App = () => {
       <Notification message={errorMessage} />
 
       {!user && loginForm()}
-      {user && blogList()}
+      {user && loggedIn()}
+      {user && blogForm()}
+
+      {blogs.map(blog =>
+        <Blog key={blog.id} blog={blog} />
+      )}
     </div>
   )
 }
