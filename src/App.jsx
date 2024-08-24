@@ -100,7 +100,7 @@ const App = () => {
     </div>
   )
 
-  const handleLike = async (blog) => {
+  const onLike = async (blog) => {
     const updatedBlog = {
       ...blog,
       likes: blog.likes + 1,
@@ -119,6 +119,10 @@ const App = () => {
 
   const sortedBlogs = blogs.slice().sort((a,b) => b.likes - a.likes)
 
+  const handleDelete = (id) => {
+    setBlogs(blogs.filter(blog => blog.id !== id))
+  }
+
   return (
     <div>
       <h1>Blogs</h1>
@@ -136,7 +140,7 @@ const App = () => {
       {user && loggedIn()}
 
       {sortedBlogs.map(blog =>
-        <Blog key={blog.id} blog={blog} handleLike={handleLike} />
+        <Blog key={blog.id} blog={blog} handleLike={onLike} onDelete={handleDelete} />
       )}
     </div>
   )
