@@ -117,6 +117,8 @@ const App = () => {
     }
   }
 
+  const sortedBlogs = blogs.slice().sort((a,b) => b.likes - a.likes)
+
   return (
     <div>
       <h1>Blogs</h1>
@@ -133,7 +135,7 @@ const App = () => {
       )}
       {user && loggedIn()}
 
-      {blogs.map(blog =>
+      {sortedBlogs.map(blog =>
         <Blog key={blog.id} blog={blog} handleLike={handleLike} />
       )}
     </div>
