@@ -100,6 +100,23 @@ const App = () => {
     </div>
   )
 
+  const handleLike = async (blog) => {
+    const updatedBlog = {
+      ...blog,
+      likes: blog.likes + 1,
+    }
+  
+    try {
+      const returnedBlog = await blogService.update(blog.id, updatedBlog)
+      setBlogs(blogs.map(b => b.id !== blog.id ? b : returnedBlog))
+    } catch (error) {
+      setNewMessage({ message: `Error liking the blog ${blog.title}`, type: 'error' })
+      setTimeout(() => {
+        setNewMessage({ message: null, type: '' })
+      }, 5000)
+    }
+  }
+
   return (
     <div>
       <h1>Blogs</h1>
@@ -117,7 +134,7 @@ const App = () => {
       {user && loggedIn()}
 
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} handleLike={handleLike} />
       )}
     </div>
   )
