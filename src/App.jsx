@@ -100,7 +100,7 @@ const App = () => {
     </div>
   )
 
-  const onLike = async (blog) => {
+  const handleLike = async (blog) => {
     const updatedBlog = {
       ...blog,
       likes: blog.likes + 1,
@@ -140,7 +140,7 @@ const App = () => {
       {user && loggedIn()}
 
       {sortedBlogs.map(blog =>
-        <Blog key={blog.id} blog={blog} handleLike={onLike} onDelete={handleDelete} />
+        <Blog key={blog.id} blog={blog} onLike={handleLike} onDelete={handleDelete} />
       )}
     </div>
   )
