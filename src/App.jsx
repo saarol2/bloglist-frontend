@@ -9,7 +9,7 @@ import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [newMessage, setNewMessage] = useState({message: null, type: ''})
+  const [newMessage, setNewMessage] = useState({ message: null, type: '' })
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -37,14 +37,14 @@ const App = () => {
     BlogFormRef.current.toggleVisibility()
     blogService.
       create(blogObject)
-        .then(returnedBlog => {
-          setBlogs(blogs.concat(returnedBlog))
-          setNewMessage({message: `a new blog ${blogObject.title} by ${blogObject.author} added`, type: 'success'})
-            setTimeout(() => {
-              setNewMessage({ message: null, type: '' })
-            }, 5000)
-            BlogFormRef.current.toggleVisibility()
-        })
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setNewMessage({ message: `a new blog ${blogObject.title} by ${blogObject.author} added`, type: 'success' })
+        setTimeout(() => {
+          setNewMessage({ message: null, type: '' })
+        }, 5000)
+        BlogFormRef.current.toggleVisibility()
+      })
   }
 
   const handleUsernameChange = (event) => {
@@ -64,20 +64,20 @@ const App = () => {
       })
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
-      ) 
+      )
       blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
-      setNewMessage({message: `Login successful`, type: 'success'})
-        setTimeout(() => {
-          setNewMessage({ message: null, type: '' })
-        }, 5000)
+      setNewMessage({ message: 'Login successful', type: 'success' })
+      setTimeout(() => {
+        setNewMessage({ message: null, type: '' })
+      }, 5000)
     } catch (exception) {
-      setNewMessage({ message: `wrong username or password`, type: 'error' })
-        setTimeout(() => {
-          setNewMessage({ message: null, type: '' })
-        }, 5000)
+      setNewMessage({ message: 'wrong username or password', type: 'error' })
+      setTimeout(() => {
+        setNewMessage({ message: null, type: '' })
+      }, 5000)
     }
   }
 
@@ -87,12 +87,12 @@ const App = () => {
     setBlogs([])
   }
 
-  
+
   const loggedIn = () => (
     <div>
       <h2>blogs</h2>
       <p>{user.name} logged in
-      <button onClick={handleLogout}>logout</button>
+        <button onClick={handleLogout}>logout</button>
       </p>
       <Togglable buttonLabel="new blog" ref={BlogFormRef}>
         <BlogForm createBlog={addBlog}/>
@@ -105,7 +105,7 @@ const App = () => {
       ...blog,
       likes: blog.likes + 1,
     }
-  
+
     try {
       const returnedBlog = await blogService.update(blog.id, updatedBlog)
       setBlogs(blogs.map(b => b.id !== blog.id ? b : returnedBlog))
