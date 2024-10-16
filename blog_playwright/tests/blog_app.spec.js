@@ -3,8 +3,8 @@ const { loginWith, createBlog } = require('./helper')
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
-    await request.post('http:localhost:3003/api/testing/reset')
-    await request.post('http://localhost:3003/api/users', {
+    await request.post('/api/testing/reset')
+    await request.post('/api/users', {
       data: {
         name: 'Matti Luukkainen',
         username: 'mluukkai',
@@ -12,7 +12,7 @@ describe('Blog app', () => {
       }
     })
 
-    await page.goto('http://localhost:5173')
+    await page.goto('')
   })
 
   test('Login form is shown', async ({ page }) => {
@@ -51,6 +51,16 @@ describe('Blog app', () => {
     test('a new blog can be created', async ({ page }) => {
       await createBlog(page, 'test title', 'test author', 'test url')
       await expect(await page.getByText('test title test author')).toBeVisible()
+    })
+
+    test('a blog can be liked', async ({ page }) => {
+      await createBlog(page, 'try to like this', 'another test author', 'test url')
+      const otherBlogText = await page.getByText('try to like this another test author')
+      const otherBlogElement = await otherBlogText.locator('..')
+
+      await otherBlogElement.getByRole('button', { name: 'view' }).click()
+      await page.getByRole('button', { name: 'like' }).click()
+      await expect(await page.getByText('likes 1')).toBeVisible()
     })
   })
 })
