@@ -94,5 +94,38 @@ describe('Blog app', () => {
       await otherBlogElement.getByRole('button', { name: 'view' }).click()
       await expect(await page.getByRole('button', { name: 'delete' })).not.toBeVisible()
     })
+
+    test('blogs are ordered by likes', async ({ page }) => {
+      await createBlog(page, 'first', 'first', 'first')
+      const first = await page.getByText('first first')
+      const firstElement = await first.locator('..')
+
+      await firstElement.getByRole('button', { name: 'view' }).click()
+      await firstElement.getByRole('button', { name: 'like' }).click()
+      await firstElement.getByRole('button', { name: 'like' }).click()
+      await firstElement.getByRole('button', { name: 'like' }).click()
+
+
+      await createBlog(page, 'second', 'second', 'second')
+      const second = await page.getByText('second second')
+      const secondElement = await second.locator('..')
+
+      await secondElement.getByRole('button', { name: 'view' }).click()
+      await secondElement.getByRole('button', { name: 'like' }).click()
+      await secondElement.getByRole('button', { name: 'like' }).click()
+
+      await createBlog(page, 'third', 'third', 'third')
+      const third = await page.getByText('third third')
+      const thirdElement = await third.locator('..')
+
+      await thirdElement.getByRole('button', { name: 'view' }).click()
+      await thirdElement.getByRole('button', { name: 'like' }).click()
+
+      const blogs = await page.locator('.blog')
+      const blogTitles = await blogs.evaluateAll((elements) => elements.map(e => e.innerText))
+      expect(blogTitles[0]).toContain('first')
+      expect(blogTitles[1]).toContain('second')
+      expect(blogTitles[2]).toContain('third')
+    })
   })
 })
