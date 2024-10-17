@@ -140,7 +140,7 @@ const App = () => {
       {user && loggedIn()}
 
       {sortedBlogs.map(blog =>
-        <Blog key={blog.id} blog={blog} onLike={handleLike} onDelete={handleDelete} />
+        <Blog key={blog.id} blog={blog} onLike={handleLike} onDelete={handleDelete} currentUser={username} />
       )}
     </div>
   )

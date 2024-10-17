@@ -73,5 +73,26 @@ describe('Blog app', () => {
       await otherBlogElement.getByRole('button', { name: 'delete' }).click()
       await expect(otherBlogText).not.toBeVisible()
     })
+
+    test('only the user who created it, sees the delete button', async ({ page, request }) => {
+      await request.post('/api/users', {
+        data: {
+          name: 'testaaja',
+          username: 'testaaja',
+          password: 'testaaja'
+        }
+      })
+      await createBlog(page, 'try to delete this', 'another test author', 'test url')
+      const otherBlogText = await page.getByText('try to delete this another test author')
+      const otherBlogElement = await otherBlogText.locator('..')
+
+      await otherBlogElement.getByRole('button', { name: 'view' }).click()
+      await expect(await page.getByRole('button', { name: 'delete' })).toBeVisible()
+
+      await page.getByRole('button', { name: 'logout' }).click()
+      await loginWith(page, 'testaaja', 'testaaja')
+      await otherBlogElement.getByRole('button', { name: 'view' }).click()
+      await expect(await page.getByRole('button', { name: 'delete' })).not.toBeVisible()
+    })
   })
 })
