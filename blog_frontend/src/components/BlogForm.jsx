@@ -19,7 +19,7 @@ const BlogForm = ({ createBlog }) => {
   }
 
   return (
-    <div>
+    <div className="blogForm">
       <h2>Create new blog</h2>
       <form onSubmit={addBlog}>
         <div>
@@ -42,7 +42,7 @@ const BlogForm = ({ createBlog }) => {
             placeholder='author'
           />
         </div>
-        <div>
+        <div className='urlInput'>
           url:
           <input
             data-testid='url'

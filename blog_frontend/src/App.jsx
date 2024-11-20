@@ -89,9 +89,9 @@ const App = () => {
 
 
   const loggedIn = () => (
-    <div>
+    <div className="loggedIn">
       <p>{user.name} logged in
-        <button onClick={handleLogout}>logout</button>
+        <button className="logout" onClick={handleLogout}>logout</button>
       </p>
       <Togglable buttonLabel="new blog" ref={BlogFormRef}>
         <BlogForm createBlog={addBlog}/>
@@ -123,8 +123,8 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h1>BlogList</h1>
+    <div className="main">
+      <h1 className="blogList">BlogList</h1>
       <Notification message={newMessage.message} type={newMessage.type} />
 
       {!user && (

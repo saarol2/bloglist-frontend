@@ -30,5 +30,5 @@ The project leverages several key technologies, including:
 
 ### Testing
 
-- **Vitest**: Unit and integration tests for backend logic are written with Jest.
+- **Vitest**: Unit and integration tests for backend logic are written with Vitest.
 - **Playwright**: End-to-end tests verify that the entire application works as expected.

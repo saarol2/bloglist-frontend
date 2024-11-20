@@ -8,10 +8,10 @@ const LoginForm = ({
   password
 }) => {
   return (
-    <div>
+    <div className="loginForm">
       <h2>log in to application</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="loginInput">
          username
           <input
             data-testid='username'
@@ -19,7 +19,7 @@ const LoginForm = ({
             onChange={handleUsernameChange}
           />
         </div>
-        <div>
+        <div className="loginInput">
          password
           <input
             data-testid='password'
