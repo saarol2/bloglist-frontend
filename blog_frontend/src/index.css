@@ -1,11 +1,14 @@
 .notification {
-  background: lightgrey;
+  background: rgb(27, 27, 27);
   font-size: 20px;
   border-style: solid;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
   text-align: center;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .notification-success {
@@ -26,23 +29,25 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  width: 75%;
+  width: 50%;
   margin: 0 auto;
 }
 
 .blogList {
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid rgb(255, 115, 0);
   font-weight: 700;
   width: fit-content;
   margin-bottom: 10px;
+  color: rgb(255, 115, 0);
 }
 
 .loggedIn, .loginForm {
-  background-color: lightblue;
-  border: 2px solid black;
+  background-color: rgb(27, 27, 27);
+  border: 4px solid rgb(255, 115, 0);
   margin-bottom: 10px;
   opacity: 85%;
   border-radius: 10px;
+  color: white;
 }
 
 .loginForm button {
@@ -72,26 +77,32 @@
 }
 
 .blog {
-  border-style: solid;
-  border-radius: 5px;
+  border: 5px solid;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: rgb(15, 65, 80);
-  color: rgb(233, 227, 227);
+  background-color: rgb(255, 115, 0);
+  color: black;
   opacity: 85%;
 }
 
 .viewButton {
-  background-color: lightgreen;
+  background-color: rgb(54, 54, 54);
   margin-left: 10px;
+  color: white;
+}
+
+.likeButton {
+  background-color: rgb(54, 54, 54);
+  color: white;
 }
 
 button {
-  background-color: rgb(97, 97, 238);
+  background-color: rgb(255, 115, 0);
+  color: black;
 }
 
 .main {
-  background: url('./img/background.jpg');
+  background: url('./img/carbon-fiber.jpg');
   background-size: cover;
   background-position: center;
   height: 100vh;

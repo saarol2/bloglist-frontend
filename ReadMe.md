@@ -35,4 +35,4 @@ The project leverages several key technologies, including:
 
 ## Demo Video
 
-To see the Bloglist web application in action, check out the following [Demo Video](https://youtu.be/uwqqss_3QZU)
+To see the Bloglist web application in action, check out the following [Demo Video](https://youtu.be/UaNdbm4-a-Y)

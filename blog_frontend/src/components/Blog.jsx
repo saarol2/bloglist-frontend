@@ -39,7 +39,7 @@ const Blog = ({ blog, onLike, onDelete, currentUser }) => {
       {visibility && (
         <div className="blogDetails">
           <p>{blog.url}</p>
-          <p>Likes: {blog.likes} <button onClick={() => onLike(blog)}>like</button></p>
+          <p>Likes: {blog.likes} <button className="likeButton" onClick={() => onLike(blog)}>like</button></p>
           {currentUser.id === blog.user.id && (
             <button onClick={handleDelete}>delete</button>
           )}
